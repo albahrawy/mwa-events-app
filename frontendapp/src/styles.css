@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import  url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+body {
+    background: #456;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.has-error input[type="email"],
+.has-error input[type="password"] {
+    border-color: rgb(216, 12, 12);
+    color: rgb(230, 14, 14);
+}
