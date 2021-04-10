@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: rgb(15, 66, 107);
+}
+
+.login-header {
+  background: rgb(12, 77, 129);
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+.action-bar {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.login-button {
+  background-color: rgb(15, 66, 107);
+}
+
+.signup-span {
+  margin: 12px;
+}
+
+.signup-link {
+  margin: 12px;
+  text-decoration: none;
+}
+
+.login-spinner {
+  width: 30px;
+  height: 20px;
+}
