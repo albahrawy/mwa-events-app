@@ -1,0 +1,33 @@
+<mat-label>Category</mat-label>
+    <mat-select>
+      <mat-option value="one">Music</mat-option>
+      <mat-option value="two">Art</mat-option>
+      <mat-option value="two">Sport</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <fuse-search-bar (input)="search($event)"></fuse-search-bar>
+
+<div class="event-container">
+    <mat-card *ngFor="let ev of events" class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image" [style.background-image]="'url('+ev.image+')'"></div>
+        <mat-card-title>{{ev.title}}</mat-card-title>
+        <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <img mat-card-image [src]="ev.image" alt="Photo of a Shiba Inu" />
+      <mat-card-content>
+        <div>
+          {{ev.description}}
+        </div>
+        <div>ev.location</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Join</button>
+  
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  
