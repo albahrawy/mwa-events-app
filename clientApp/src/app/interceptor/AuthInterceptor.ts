@@ -1,9 +1,10 @@
 
 
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { UserService } from './../service/userservice.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -18,6 +19,16 @@ export class JwtInterceptor implements HttpInterceptor {
                 headers: request.headers.set("Authorization", "Bearer " + token)
             });
         }
-        return next.handle(request);
+        return next.handle(request)
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    if (!(error.error instanceof ErrorEvent)) {
+                        if (error.status === 401) {
+                            this.authenticationService.logout();
+                        }
+                    }
+                    return throwError(error);
+                })
+            );
     }
-} 
+}

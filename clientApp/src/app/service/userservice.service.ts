@@ -1,35 +1,60 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, zip } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, of, zip } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { IResponseResult, IUserCredential } from '../user/model';
+import { getUrl } from '../service/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  token: string | null = '';
+  
+  private userInfo: { token: string, email: string };
 
-  baseUrl: string = 'http://localhost:3000/users';
+  loggedInChanges: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {
+    this.loggedInChanges = new BehaviorSubject(false);
+  }
 
   getToken() {
-    return this.token || (this.token = localStorage.getItem('token'));
+    return this.getUserInfo()?.token;
+  }
+
+  getUserInfo() {
+    if (!this.userInfo) {
+      const cachedInfo = localStorage.getItem('userInfo');
+      if (!!cachedInfo) {
+        this.userInfo = JSON.parse(cachedInfo);
+      }
+    }
+    return this.userInfo;
+  }
+
+  logout() {
+    if (!!this.getToken()) {
+      this.userInfo = null;
+      this.loggedInChanges.next(false);
+      localStorage.removeItem('userInfo');
+      this.router.navigate(['/']);
+    }
   }
 
   signIn(user: IUserCredential): Observable<IResponseResult> {
-    return this.http.post<{ token: string }>(this.baseUrl + '/signin', user)
+    return this.http.post<{ token: string, email: string }>(getUrl('users', 'signin'), user)
       .pipe(map(res => {
-        this.token = res.token;
-        localStorage.setItem('token', this.token);
+        this.userInfo = res;
+        localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+        this.loggedInChanges.next(true);
         return { success: true };
       }), catchError(error => of({ success: false, message: error.error?.message || error.message })));
   }
 
   signup(user: any): Observable<IResponseResult> {
-    return this.http.post<{ message: string }>(this.baseUrl + '/signup', user)
+    return this.http.post<{ message: string }>(getUrl('users', 'signup'), user)
       .pipe(map(res => {
         return { success: true, message: res.message };
       }), catchError(error => {

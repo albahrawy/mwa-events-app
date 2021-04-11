@@ -1,91 +1,49 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, ContentChild, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { Observable } from "rxjs";
+import { EventService } from "src/app/service/events.service";
 
 /**
  * @title Card with multiple sections
  */
 @Component({
-  selector: "card-fancy-example",
-  templateUrl: "card-fancy-example.html",
-  styleUrls: ["card-fancy-example.css"]
+  selector: "display-event",
+  templateUrl: "./display-events.component.html",
+  styleUrls: ["./display-events.component.scss"]
 })
-export class CardFancyExample {
-  events = [
-    {
-      name: "name1",
-      title: "title1",
-      description: "description1",
-      date: "date1",
-      address: "location1",
-      location: { long: 1, lat: 2 },
-      category: "",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg",
-      comments: [],
-      members: []
-    },
-    {
-      name: "name2",
-      title: "title2",
-      description: "description2",
-      date: "date2",
-      location: "location2",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name3",
-      title: "title3",
-      description: "description3",
-      date: "date3",
-      location: "location3",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name4",
-      title: "title4",
-      description: "description4",
-      date: "date4",
-      location: "location4",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name5",
-      title: "title5",
-      description: "description5",
-      date: "date5",
-      location: "location5",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name6",
-      title: "title6",
-      description: "description6",
-      date: "date6",
-      location: "location6",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name7",
-      title: "title7",
-      description: "description7",
-      date: "date7",
-      location: "location7",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name8",
-      title: "title8",
-      description: "description8",
-      date: "date8",
-      location: "location8",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      name: "name9",
-      title: "title9",
-      description: "description9",
-      date: "date9",
-      location: "location9",
-      image: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    }
-  ];
-}
+export class DisplayEventComponent implements OnInit {
 
+  searchgrp: FormGroup;
+  events$: Observable<any>;
+  
+
+  constructor(private builder: FormBuilder, private eventService: EventService) {
+    this.searchgrp = this.builder.group({
+      keyword: [''],
+      category: [''],
+      address: this.builder.group({
+        state: [''],
+        city: [''],
+        zip: ['']
+      })
+    });
+
+
+  }
+
+  ngOnInit(): void {
+    this.events$ = this.eventService.getEvents();
+  }
+
+  doSearch() {
+    const searchValue = this.searchgrp.value;
+    this.events$ = this.eventService.getEvents(searchValue);
+  }
+
+  attend(eventId, btn) {
+    this.eventService.attendToEvent(eventId).subscribe(e => {
+      btn.text = 'Joined';
+      btn.disabled = true;
+    });
+  }
+}

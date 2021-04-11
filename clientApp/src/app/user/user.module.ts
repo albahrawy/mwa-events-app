@@ -4,10 +4,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { AppUserRoutingModule } from './app-user-routing';
 import { MaterialModule } from '../material.module';
-
 
 
 @NgModule({
@@ -21,18 +19,6 @@ import { MaterialModule } from '../material.module';
     ReactiveFormsModule,
     AppUserRoutingModule,
     MaterialModule,
-    RouterModule.forChild([
-      {
-        path: 'signup',
-        component: SignupComponent
-      },
-      {
-        path: 'signin', component: SigninComponent
-      },
-      {
-        path: '', redirectTo: 'signup', pathMatch: 'full'
-      }
-    ])
   ]
 })
 export class UserModule { }

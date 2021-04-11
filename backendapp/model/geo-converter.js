@@ -1,7 +1,9 @@
 const config = require('../api-config.json');
 const superagent = require('superagent');
 
-const convertAddress = (address) => {
+//https://developer.here.com/
+
+const convertAddress = (searchtext) => {
     return new Promise((res) => {
         superagent.get(`https://geocoder.ls.hereapi.com/search/6.2/geocode.json?languages=en-US&maxresults=1`)
             .query({ 'apiKey': config.geo_here_key })

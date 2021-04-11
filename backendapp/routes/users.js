@@ -20,8 +20,8 @@ router.post('/signin', async (req, res, next) => {
       return next({ status: 401, message: 'unsuccessful login attempt' });
     }
 
-    const token = createJwt({ email: user.email, id: user._id });
-    res.status(200).json({ token: token });
+    const token = createJwt({ email: user.email, id: user._id, location: user.location, name: user.name });
+    res.status(200).json({ token: token, email });
   } catch (err) {
     next({ status: 500, message: err });
   }
@@ -29,13 +29,14 @@ router.post('/signin', async (req, res, next) => {
 })
 
 router.post('/signup', async (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-
   try {
-    const hashPassword = await bcrypt.hash(password, BCRYPTFinal);
-    
-    const user = new User({ email: email, password: hashPassword });
+    req.body.password = await bcrypt.hash(req.body.password, BCRYPTFinal);
+    if (!!req.body?.address) {
+      const address = `${req.body.address.city},${req.body.address.state},${req.body.address.zip}`;
+      req.body.location = await convertAddress(address);
+    }
+
+    const user = new User(req.body);
     await user.save();
     res.json({ message: 'Account user successfully created!!!' });
   } catch (err) {
@@ -44,9 +45,9 @@ router.post('/signup', async (req, res, next) => {
 
 })
 
-/* GET users listing. */
-router.get('/api/protected', checkJwt, (req, res) => {
-  res.json(token);
-});
+// /* GET users listing. */
+// router.get('/api/protected', checkJwt, (req, res) => {
+//   res.json(token);
+// });
 
 module.exports = router;

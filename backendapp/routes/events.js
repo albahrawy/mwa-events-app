@@ -6,12 +6,30 @@ var router = express.Router();
 
 
 router.get('/', async (req, res, next) => {
-    await Events.find({}, (err, event) => {
+    const location = req.userInfo?.location;
+    const criteria = !!location ? { location: { $near: Object.values(location) } } : {};
+    Events.find(criteria, null, { limit: 12 }, (err, event) => {
         if (err) { return next(err) }
         res.json(event);
     });
 });
-router.get('/userEvents', async (req, res, next) => {
+
+router.post('/', async (req, res, next) => {
+    const filter = req.body || {};
+    if (!!filter.keyword) {
+        filter.$text = { $search: filter.keyword };
+        delete filter.keyword;
+    }
+    console.log(filter);
+    Events.find(filter, (err, event) => {
+        if (err) { return next(err) }
+        res.json(event);
+    });
+});
+
+
+
+router.get('/myEvents', async (req, res, next) => {
     const requserId = req.userInfo?.id;
     await Events.find({ hostId: requserId }, (err, event) => {
         if (err) { return next(err) }
@@ -21,7 +39,7 @@ router.get('/userEvents', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     if (!!req.body?.address) {
         const address = `${req.body.address.city},${req.body.address.state},${req.body.address.zip}`;
-        req.body.location = convertAddress(address);
+        req.body.location = await convertAddress(address);
     }
     let newEvent = new Events(req.body);
     await newEvent.save((err, event) => {
@@ -31,6 +49,7 @@ router.post('/', async (req, res, next) => {
         res.json(event);
     });
 })
+
 router.put('/:id', async (req, res, next) => {
     const requserId = req.userInfo?.id;
     if (!requserId || requserId != req.body?.hostId) {
@@ -45,6 +64,17 @@ router.put('/:id', async (req, res, next) => {
         res.json(event);
     })
 })
+
+router.patch('/join/:id', async (req, res, next) => {
+    const attende = { name: req.userInfo.name, email: req.userInfo.email };
+    await Events.updateOne({ _id: req.params.id }, { $addToSet: { 'attendees': attende } }, {}, (err, event) => {
+        if (err) {
+            return next(err)
+        }
+        res.json(event);
+    })
+})
+
 router.delete('/:id', async (req, res, next) => {
     const requserId = req.userInfo?.id;
     if (!requserId || requserId != req.params.id) {

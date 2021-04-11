@@ -1,29 +1,80 @@
 <h1 style="text-align:center">
   Welcome to Events App
 </h1>
-<div class="login" *ngIf="!success; else successTemplate">
-  <h2 class="login-header">SIGN IN</h2>
+<div class="login">
+  <h2 class="login-header">SIGN UP</h2>
   <form [formGroup]="fg" class="login-container" (ngSubmit)="onSubmit()">
-    <mat-form-field>
+
+    <div class="name-area" formGroupName="name">
+      <span class="caption-span">Full Name</span>
+      <div class="name-content">
+        <mat-form-field>
+          <mat-label>First</mat-label>
+          <input matInput type="text" formControlName="first">
+          <mat-error>
+            <ng-container *ngIf="formControls.name?.get('first')?.errors?.required">First Name is required
+            </ng-container>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Last</mat-label>
+          <input matInput type="text" formControlName="last">
+          <mat-error>
+            <ng-container *ngIf="formControls.name?.get('last')?.errors?.required">Last Name is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="address-area" formGroupName="address">
+      <span class="caption-span">Address</span>
+      <div class="address-content">
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <input matInput type="text" formControlName="state">
+          <mat-error>
+            <ng-container *ngIf="formControls.name?.get('state')?.errors?.required">State is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput type="text" formControlName="city">
+          <mat-error>
+            <ng-container *ngIf="formControls.name?.get('city')?.errors?.required">City is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Zip</mat-label>
+          <input matInput type="text" formControlName="zip">
+          <mat-error>
+            <ng-container *ngIf="formControls.name?.get('zip')?.errors?.required">Zip is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput type="email" formControlName="email" (input)="clearError()">
+      <input matInput type="email" formControlName="email">
       <mat-error>
         <ng-container *ngIf="formControls.email.errors?.required">Email is required</ng-container>
         <ng-container *ngIf="formControls.email.errors?.email">Invalid Email</ng-container>
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput type="password" (input)="clearError()" formControlName="password">
+      <input matInput type="password" formControlName="password">
       <mat-error>
         <ng-container *ngIf="formControls.password.errors?.required">Password is required</ng-container>
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Confirm Password</mat-label>
-      <input matInput type="password" (input)="clearError()" formControlName="cfPassword">
+      <input matInput type="password" formControlName="cfPassword">
       <mat-error>
         <ng-container *ngIf="formControls.cfPassword.errors?.required">Password is required</ng-container>
         <ng-container *ngIf="formControls.cfPassword.errors?.mismatch">The Passwords must match</ng-container>
@@ -31,19 +82,11 @@
     </mat-form-field>
 
     <div class="action-bar">
-      <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="busy||!fg.valid">Log
-        in</button>
+      <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="busy||!fg.valid">Sign
+        up</button>
       <div *ngIf="busy" class="login-spinner">
         <mat-spinner></mat-spinner>
       </div>
     </div>
-
-    <div>
-      {{error}}
-    </div>
   </form>
 </div>
-
-<ng-template #successTemplate>
-  <div>success and bla bla </div>
-</ng-template>

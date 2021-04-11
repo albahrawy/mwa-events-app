@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const User = mongoose.model('Users', {
+  name: {
+    first: { type: String },
+    last: { type: String }
+  },
   email: {
     type: String,
     required: true,
@@ -30,10 +34,8 @@ const User = mongoose.model('Users', {
   location: {
     long: {
       type: Number,
-      required: true
     }, lat: {
       type: Number,
-      required: true
     }
   },
 });

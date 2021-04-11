@@ -20,7 +20,7 @@ const Event = mongoose.model('Events', {
         required: true
     },
     hostId: {
-        type: ObjectId()
+        type: String
 
     },
     address: {
@@ -62,11 +62,8 @@ const Event = mongoose.model('Events', {
     }],
     attendees: [{
         name: {
-            type: String
-
-        }, lastName: {
-            type: String
-
+            first: { type: String },
+            last: { type: String }
         },
         email: {
             type: String

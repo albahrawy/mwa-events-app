@@ -1,4 +1,5 @@
 {
     "secret_private_key": "mwa-2021-project",
-    "geo_here_key": "e1yYOHZ-4tw1ik_jq5Hia1XTJTbnA9Hz2JjoG_FgGvQ"
+    "geo_here_key": "T3jDT8TduNYmlsI71C8sXXjj5v3LlEIlqrRr1-ikJcg",
+    "dbConnection": "mongodb://localhost:27017/eventdb"
 }

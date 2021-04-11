@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 .login {
-  width: 400px;
+  width: 600px;
   margin: 16px auto;
   font-size: 16px;
 }
@@ -57,4 +57,41 @@
 .login-spinner {
   width: 30px;
   height: 20px;
+}
+
+.address-area {
+  margin-top: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.address-content {
+  display: flex;
+}
+
+.name-area {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.name-content {
+  display: flex;
+}
+
+.name-area .mat-form-field {
+  width: 50%;
+  margin-right: 5px;
+}
+
+.address-content .mat-form-field {
+  width: 33%;
+  margin-right: 5px;
+}
+
+.caption-span {
+  color: gray;
 }

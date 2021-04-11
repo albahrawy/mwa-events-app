@@ -1,39 +1,42 @@
-<h1 style="text-align:center">
-  Welcome to Events App
-</h1>
-<div class="login">
-  <h2 class="login-header">SIGN IN</h2>
-  <form [formGroup]="fg" class="login-container" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput type="email" formControlName="email" (input)="clearError()">
-      <mat-error>
-        <ng-container *ngIf="formControls.email.errors?.required">Email is required</ng-container>
-        <ng-container *ngIf="formControls.email.errors?.email">Invalid Email</ng-container>
-      </mat-error>
-    </mat-form-field>
+<div class="left-side"></div>
+<div class="right-side">
+  <div class="login-wrapper">
+    <div class="login">
+      <h2 class="login-header">SIGN IN</h2>
+      <form [formGroup]="fg" class="login-container" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" (input)="clearError()">
+          <mat-error>
+            <ng-container *ngIf="formControls.email.errors?.required">Email is required</ng-container>
+            <ng-container *ngIf="formControls.email.errors?.email">Invalid Email</ng-container>
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input matInput type="password" placeholder="Password" (input)="clearError()" formControlName="password">
-      <mat-error>
-        <ng-container *ngIf="formControls.password.errors?.required">Password is required</ng-container>
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" (input)="clearError()" formControlName="password">
+          <mat-error>
+            <ng-container *ngIf="formControls.password.errors?.required">Password is required</ng-container>
+          </mat-error>
+        </mat-form-field>
 
-    <div class="action-bar">
-      <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="busy||!fg.valid">Log
-        in</button>
-      <div *ngIf="busy" class="login-spinner">
-        <mat-spinner></mat-spinner>
-      </div>
-    </div>
+        <div class="action-bar">
+          <button mat-raised-button class="login-button" type="submit" [disabled]="busy||!fg.valid">
+            <span class="fill-remaning-area">Log in</span>
+            <div *ngIf="busy" class="login-spinner">
+              <mat-spinner [diameter]="20"></mat-spinner>
+            </div>
+          </button>
+        </div>
 
-    <div class="sign-up">
-      <span class="signup-span">Don't have an account?</span>
-      <a class="signup-link" [routerLink]="['../signup']">Sign Up</a>
+        <div class="sign-up">
+          <span class="signup-span">Don't have an account?</span>
+          <a class="signup-link" [routerLink]="['../signup']">Sign up</a>
+        </div>
+        <div>
+          {{error}}
+        </div>
+      </form>
     </div>
-    <div>
-      {{error}}
-    </div>
-  </form>
+  </div>
 </div>
