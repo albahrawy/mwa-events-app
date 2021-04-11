@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
+const { jwtVerify } = require('./middleware/check-jwt');
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/userdb", {
+mongoose.connect("mongodb://localhost:27017/eventdb", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
@@ -14,6 +15,7 @@ mongoose.connect("mongodb://localhost:27017/userdb", {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var eventsRouter = require('./routes/events');
 
 
 
@@ -34,6 +36,8 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/events', jwtVerify);
+app.use('/events', eventsRouter);
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
