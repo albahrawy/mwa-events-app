@@ -52,7 +52,10 @@ const Event = mongoose.model('Events', {
         type: String
     },
     comments: [{
-        name: { type: String },
+        name: {
+            first: { type: String },
+            last: { type: String }
+        },
 
         email: {
             type: String
