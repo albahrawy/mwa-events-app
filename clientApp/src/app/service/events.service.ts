@@ -38,6 +38,9 @@ export class EventService {
         return this.http.delete(getUrl('events', eventId));
     }
 
+    addComment(comment: string, eventId: string) {
+        return this.http.patch(getUrl('events', 'comment', eventId), { comment });
+    }
 
 
     private normalize(obj, parentKey = null, parent = {}) {

@@ -94,6 +94,18 @@ router.patch('/join/:id', async (req, res, next) => {
     })
 })
 
+
+router.patch('/comment/:id', async (req, res, next) => {
+    
+    const comment = { name: req.userInfo.name, email: req.userInfo.email, content: req.body.comment };
+    console.log(comment);
+    await Events.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { 'comments': comment } }, {}, (err, event) => {
+        if (err) {
+            return next(err)
+        }
+        res.json(event);
+    })
+})
 router.delete('/:id', async (req, res, next) => {
     const requserId = req.userInfo?.id;
     if (!requserId || requserId != req.params.id) {
