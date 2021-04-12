@@ -2,10 +2,13 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  background-color: #EEE2DC;
 }
 .page-header {
   margin-top: 10px;
   margin-left: 10px;
+  text-align: center;
+  font-family: Blippo, fantasy;
 }
 .event-form {
   display: flex;
