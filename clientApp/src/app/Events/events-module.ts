@@ -12,6 +12,7 @@ import { EventDetailsComponent } from "./event-details/event-details.component";
 import { FileDropZoneDirective } from "./file-drop-zone.directive";
 import { FromApiUrlPipe } from "./from-api";
 import { MyEventsComponent } from "./my-events/my-events.component";
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const routes: Routes = [
     {
@@ -43,6 +44,7 @@ const routes: Routes = [
         CommonModule,
         MaterialModule,
         ReactiveFormsModule,
+        MatGridListModule,
         RouterModule.forChild(routes)
     ]
 })

@@ -11,13 +11,129 @@
       </form>
     </div>
   </div> -->
-<ng-container *ngIf="event$|async; let ev">
+  <!-- <div class="event-container">
 
-  <ul>
-    <li *ngFor="let attend of ev.attendees">{{attend.name.first}} {{attend.name.last}}</li>
-  </ul>
+    <ng-container *ngIf="event$|async; let ev">
 
-</ng-container>>
+
+      <ul>
+        <li *ngFor="let attend of ev.attendees">{{attend.name.first}} {{attend.name.last}}</li>
+        <li>{{attend.title}} {{attend.}}</lititle>
+        <li>{{attend.description.first}} {{attend.descriptiont}}</li>
+        <li *ngFor="let attend of ev.attendees">{{attend.location}} {{attend.location}}</li>
+        <li *ngFor="let attend of ev.attendees">{{attend.name.first}} {{attend.name.last}}</li>
+      </ul>
+    
+    </ng-container>>
+  </div> -->
+
+  <!-- <div class="event-container" *ngIf="event$|async; let ev">
+    <mat-card  class="event-card">
+      <mat-card-header>
+        <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+(ev.image|fromapi)+')'"></div>
+        <mat-card-title>{{ev.title}}</mat-card-title>
+        <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="image-container">
+        <img mat-card-image [src]="ev.image|fromapi" class="image-view" />
+      </div>
+      <mat-card-content>
+        <div>
+          {{ev.description}}
+        </div>
+        <div>ev.location</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <ex-button #btnJoin [text]="'Join'|isJoined:ev" [disabled]="false|isJoined:ev"
+          (buttonClicked)="attend(ev._id,btnJoin)">
+          <span>first value</span>
+          <label>second value</label>
+        </ex-button>
+        <form class="example-form">
+  
+          <mat-form-field class="example-full-width">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
+        </form>
+      </mat-card-actions>
+    </mat-card>
+  
+  </div> -->
+  <mat-grid-list cols="2" rowHeight="1.5:1">
+    <mat-grid-tile colspan="1">
+      <div class="event-container" *ngIf="event$|async; let ev">
+        <mat-card  class="event-card">
+          <mat-card-header>
+            <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+(ev.image|fromapi)+')'"></div>
+            <mat-card-title>{{ev.title}}</mat-card-title>
+            <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
+          </mat-card-header>
+          <div class="image-container">
+            <img mat-card-image [src]="ev.image|fromapi" class="image-view" />
+          </div>
+          <mat-card-content>
+            <div>
+              {{ev.description}}
+            </div>
+            <div>ev.location</div>
+          </mat-card-content>
+          <mat-card-actions>
+            <ex-button #btnJoin [text]="'Join'|isJoined:ev" [disabled]="false|isJoined:ev"
+              (buttonClicked)="attend(ev._id,btnJoin)">
+              <span>first value</span>
+              <label>second value</label>
+            </ex-button>
+            <form class="example-form">
+      
+              <mat-form-field class="example-full-width">
+                <mat-label>Leave a comment</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+              </mat-form-field>
+            </form>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+      <div class="event-container-right">
+        <ul style="list-style-type:circle">
+          <li>Coffee</li>
+          <li>Tea</li>
+          <li>Milk</li>
+        </ul>
+        
+        <ul style="list-style-type:disc">
+          <li>Coffee</li>
+          <li>Tea</li>
+          <li>Milk</li>
+        </ul>
+        
+        <ul style="list-style-type:square">
+          <li>Coffee</li>
+          <li>Tea</li>
+          <li>Milk</li>
+        </ul>
+    
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+  </mat-grid-list>
+  
+  
+  
+  
+  
+
+
+  
+
+ 
+  
 
 
 <!-- {{event$|async|json}} -->
