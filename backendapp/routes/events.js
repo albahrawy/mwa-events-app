@@ -50,6 +50,15 @@ router.post('/', async (req, res, next) => {
     });
 })
 
+router.get('/:id', async (req, res, next) => {
+    await Events.findOne({ _id: req.params.id }, (err, event) => {
+        if (err) {
+            return next(err);
+        }
+        res.json(event);
+    })
+})
+
 router.put('/:id', async (req, res, next) => {
     const requserId = req.userInfo?.id;
     if (!requserId || requserId != req.body?.hostId) {

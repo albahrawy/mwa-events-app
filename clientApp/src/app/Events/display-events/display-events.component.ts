@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ContentChild, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { EventService } from "src/app/service/events.service";
 
@@ -15,9 +16,9 @@ export class DisplayEventComponent implements OnInit {
 
   searchgrp: FormGroup;
   events$: Observable<any>;
-  
 
-  constructor(private builder: FormBuilder, private eventService: EventService) {
+
+  constructor(private builder: FormBuilder, private eventService: EventService, private router: Router) {
     this.searchgrp = this.builder.group({
       keyword: [''],
       category: [''],
@@ -45,5 +46,9 @@ export class DisplayEventComponent implements OnInit {
       btn.text = 'Joined';
       btn.disabled = true;
     });
+  }
+
+  onEventClick(eventId) {
+    this.router.navigate(['/events',eventId]);
   }
 }

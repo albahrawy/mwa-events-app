@@ -11,5 +11,13 @@
       </form>
     </div>
   </div> -->
+<ng-container *ngIf="event$|async; let ev">
 
-  event-detail
+  <ul>
+    <li *ngFor="let attend of ev.attendees">{{attend.name.first}} {{attend.name.last}}</li>
+  </ul>
+
+</ng-container>>
+
+
+<!-- {{event$|async|json}} -->

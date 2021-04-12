@@ -31,9 +31,9 @@
 </div>
 
 <div class="event-container">
-  <mat-card *ngFor="let ev of events$|async" class="example-card">
+  <mat-card *ngFor="let ev of events$|async" class="event-card" (click)="onEventClick(ev._id)">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image" [style.background-image]="'url('+ev.image+')'"></div>
+      <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+ev.image+')'"></div>
       <mat-card-title>{{ev.title}}</mat-card-title>
       <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
     </mat-card-header>
