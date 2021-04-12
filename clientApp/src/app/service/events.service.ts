@@ -27,7 +27,7 @@ export class EventService {
     }
 
     addEvent(event) {
-        return this.http.post(getUrl(), event);
+        return this.http.post(getUrl('events', 'newEvent'), event);
     }
 
     attendToEvent(eventId) {
@@ -35,7 +35,7 @@ export class EventService {
     }
 
     deleteEvent(eventId) {
-        return this.http.delete(getUrl(eventId));
+        return this.http.delete(getUrl('events', eventId));
     }
 
 

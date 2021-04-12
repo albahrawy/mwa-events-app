@@ -1,51 +1,77 @@
-<!-- <form [formGroup]="fgp">
-<mat-form-field appearance="fill">
-    <mat-label>name</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>title</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>description</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Address</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <table class="example-full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="Ex. San Francisco">
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>State</mat-label>
-        <input matInput placeholder="Ex. California">
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Postal Code</mat-label>
-        <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" >
-        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-      </mat-form-field></td>
-    </tr></table>
-    <mat-form-field appearance="fill">
-    <mat-label>Category</mat-label>
-    <mat-select>
-      <mat-option value="one">Music</mat-option>
-      <mat-option value="two">Art</mat-option>
-      <mat-option value="two">Sport</mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
-  
-   -->
+<h1 class="page-header">Create New Event</h1>
+<form class="event-form" [formGroup]="fg" (ngSubmit)="createEvent()">
+  <div class="form-fields">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-   create-event
+    <div class="address-area" formGroupName="address">
+      <span class="caption-span">Address</span>
+      <div class="address-content">
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <input matInput type="text" formControlName="state">
+          <mat-error>
+            <ng-container *ngIf="fg.get('address')?.get('state')?.errors?.required">State is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput type="text" formControlName="city">
+          <mat-error>
+            <ng-container *ngIf="fg.get('address')?.get('city')?.errors?.required">City is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Zip</mat-label>
+          <input matInput type="text" formControlName="zip">
+          <mat-error>
+            <ng-container *ngIf="fg.get('address')?.get('zip')?.errors?.required">Zip is required</ng-container>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button mat-button type="submit" color="primary" [disabled]="busy||!fg.valid">Create Event</button>
+      <button mat-button type="reset" color="primary">Cancel</button>
+    </div>
+  </div>
+  <div class="image-fields">
+    <div class="image-area">
+      <span class="image-caption"> Choose or drage to add image:</span>
+
+      <div class="file-input-area">
+        <div class="file-input-placeholder">{{imageFile?.name || '\u00A0'}}</div>
+        <button mat-icon-button color="primary" type="button" (click)="_fileInput.click()">
+          <mat-icon>image</mat-icon>
+        </button>
+      </div>
+      <div class="image-view" fileDropZone (fileDrop)="onFileChange($event)">
+        <img [class.shown]="hasImage" #imgElement />
+      </div>
+      <input #_fileInput class="file-input" type="file" accept="images" multiple="false"
+        (change)="onFileChange($event)">
+    </div>
+  </div>
+</form>

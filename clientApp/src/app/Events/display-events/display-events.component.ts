@@ -22,6 +22,7 @@ export class DisplayEventComponent implements OnInit {
     this.searchgrp = this.builder.group({
       keyword: [''],
       category: [''],
+      joined: [''],
       address: this.builder.group({
         state: [''],
         city: [''],
@@ -49,6 +50,10 @@ export class DisplayEventComponent implements OnInit {
   }
 
   onEventClick(eventId) {
-    this.router.navigate(['/events',eventId]);
+    this.router.navigate(['/events', eventId]);
+  }
+
+  filterOnlyJoind(args) {
+    console.log(args);
   }
 }

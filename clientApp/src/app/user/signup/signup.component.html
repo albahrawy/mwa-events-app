@@ -33,7 +33,7 @@
           <mat-label>State</mat-label>
           <input matInput type="text" formControlName="state">
           <mat-error>
-            <ng-container *ngIf="formControls.name?.get('state')?.errors?.required">State is required</ng-container>
+            <ng-container *ngIf="formControls.address?.get('state')?.errors?.required">State is required</ng-container>
           </mat-error>
         </mat-form-field>
 
@@ -41,7 +41,7 @@
           <mat-label>City</mat-label>
           <input matInput type="text" formControlName="city">
           <mat-error>
-            <ng-container *ngIf="formControls.name?.get('city')?.errors?.required">City is required</ng-container>
+            <ng-container *ngIf="formControls.address?.get('city')?.errors?.required">City is required</ng-container>
           </mat-error>
         </mat-form-field>
 
@@ -49,7 +49,7 @@
           <mat-label>Zip</mat-label>
           <input matInput type="text" formControlName="zip">
           <mat-error>
-            <ng-container *ngIf="formControls.name?.get('zip')?.errors?.required">Zip is required</ng-container>
+            <ng-container *ngIf="formControls.address?.get('zip')?.errors?.required">Zip is required</ng-container>
           </mat-error>
         </mat-form-field>
       </div>

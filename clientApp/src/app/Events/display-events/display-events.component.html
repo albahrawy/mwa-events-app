@@ -28,18 +28,22 @@
   <button mat-icon-button color="primary" (click)="doSearch()">
     <mat-icon>search</mat-icon>
   </button>
+  <span class="fill-space"></span>
+  <mat-checkbox (change)="doSearch()" class="check-box" formControlName="joined">Only Joined</mat-checkbox>
+
 </div>
 
 <div class="event-container">
-  <mat-card *ngFor="let ev of events$|async" class="event-card" (click)="onEventClick(ev._id)">
-    <mat-card-header>
-      <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+ev.image+')'"></div>
+  <mat-card *ngFor="let ev of events$|async" class="event-card">
+    <mat-card-header (click)="onEventClick(ev._id)">
+      <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+(ev.image|fromapi)+')'"></div>
       <mat-card-title>{{ev.title}}</mat-card-title>
       <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
     </mat-card-header>
-
-    <img mat-card-image [src]="ev.image" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
+    <div class="image-container">
+      <img mat-card-image [src]="ev.image|fromapi" class="image-view" (click)="onEventClick(ev._id)" />
+    </div>
+    <mat-card-content (click)="onEventClick(ev._id)">
       <div>
         {{ev.description}}
       </div>

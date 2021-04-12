@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,10 +12,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   // imports: [
@@ -41,7 +45,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSelectModule,
     MatOptionModule,
     MatProgressSpinnerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
+    DragDropModule
   ],
   exports: [
     MatButtonModule,
@@ -52,7 +60,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+    DragDropModule
   ]
 })
 export class MaterialModule { }

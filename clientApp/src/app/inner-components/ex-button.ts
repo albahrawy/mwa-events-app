@@ -3,8 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 @Component({
     selector: 'ex-button',
-    template: `<button mat-button (click)="buttonClicked.emit($event)" [disabled]="disabled">{{text}}</button>`,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    template: `<button mat-button (click)="buttonClicked.emit($event)" [disabled]="disabled">{{text}}</button>`
 })
 export class ExButton {
 

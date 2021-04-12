@@ -1,8 +1,8 @@
 //var createError = require('http-errors');
 const express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const cors = require("cors");
 const { jwtVerify } = require('./middleware/check-jwt');
 const mongoose = require("mongoose");
@@ -13,13 +13,16 @@ mongoose.connect("mongodb://localhost:27017/eventdb", {
   useUnifiedTopology: true
 });
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var eventsRouter = require('./routes/events');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const eventsRouter = require('./routes/events');
 
 
 
-var app = express();
+const app = express();
+
+app.use('/picture', express.static(__dirname + '/assets/images'));
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));

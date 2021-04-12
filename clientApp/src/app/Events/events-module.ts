@@ -9,6 +9,8 @@ import { MaterialModule } from "../material.module";
 import { CreateEventComponent } from "./create-event/create-event.component";
 import { DisplayEventComponent } from "./display-events/display-events.component";
 import { EventDetailsComponent } from "./event-details/event-details.component";
+import { FileDropZoneDirective } from "./file-drop-zone.directive";
+import { FromApiUrlPipe } from "./from-api";
 import { MyEventsComponent } from "./my-events/my-events.component";
 
 const routes: Routes = [
@@ -33,7 +35,9 @@ const routes: Routes = [
         EventDetailsComponent,
         MyEventsComponent,
         ExButton,
-        IsJoind
+        IsJoind,
+        FromApiUrlPipe,
+        FileDropZoneDirective
     ],
     imports: [
         CommonModule,

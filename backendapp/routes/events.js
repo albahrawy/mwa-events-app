@@ -1,7 +1,8 @@
-var express = require('express');
+const express = require('express');
 const Events = require('../model/event');
 const convertAddress = require('../model/geo-converter');
-var router = express.Router();
+const uploader = require('../middleware/multer-upload');
+const router = express.Router();
 
 
 
@@ -20,7 +21,10 @@ router.post('/', async (req, res, next) => {
         filter.$text = { $search: filter.keyword };
         delete filter.keyword;
     }
-    console.log(filter);
+    if (!!filter.joined && !!req.userInfo) {
+        filter['attendees.email'] = req.userInfo?.email;
+        delete filter.joined;
+    }
     Events.find(filter, (err, event) => {
         if (err) { return next(err) }
         res.json(event);
@@ -36,13 +40,19 @@ router.get('/myEvents', async (req, res, next) => {
         res.json(event);
     });
 });
-router.post('/', async (req, res, next) => {
+
+router.post('/newEvent', uploader, async (req, res, next) => {
     if (!!req.body?.address) {
+        if (typeof req.body.address === "string") {
+            req.body.address = JSON.parse(req.body.address);
+        }
         const address = `${req.body.address.city},${req.body.address.state},${req.body.address.zip}`;
         req.body.location = await convertAddress(address);
     }
+    if (!!req.file) { req.body.image = req.file.filename; }
+    req.body.hostId = req.userInfo?.id;
     let newEvent = new Events(req.body);
-    await newEvent.save((err, event) => {
+    newEvent.save((err, event) => {
         if (err) {
             return next(err);
         }
