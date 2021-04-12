@@ -1,8 +1,18 @@
+
+<div class="top-side">
+  <mat-toolbar>
+   <button mat-icon-button class="example-icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Events</span>
+  <span></span>
+</mat-toolbar>
+</div>
 <div class="left-side"></div>
 <div class="right-side">
   <div class="login-wrapper">
     <div class="login">
-      <h2 class="login-header">SIGN IN</h2>
+      <button mat-button><h2 class="login-header">SIGN IN</h2></button>
       <form [formGroup]="fg" class="login-container" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-label>Email</mat-label>

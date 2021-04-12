@@ -1,10 +1,10 @@
 <div class="main-container">
   <mat-toolbar *ngIf="isLoggedIn">
-    <a mat-button [routerLink]="['events']">Events</a>
-    <a mat-button [routerLink]="['events','myevents']">My Events</a>
-    <a mat-button [routerLink]="['events','newevent']">New Event</a>
+    <a mat-button color="primary" [routerLink]="['events']">Events</a>
+    <a mat-button color="primary" [routerLink]="['events','myevents']">My Events</a>
+    <a mat-button color="primary"[routerLink]="['events','newevent']">New Event</a>
     <span class="fill-space"></span>
-    <a mat-button (click)="logout()">Logout</a>
+    <a mat-button color="primary" (click)="logout()">Logout</a>
   </mat-toolbar>
 
   <router-outlet></router-outlet>
