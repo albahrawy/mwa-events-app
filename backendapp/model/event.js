@@ -15,9 +15,9 @@ const Event = mongoose.model('Events', {
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        required: true
+    date_added: { 
+        type : Date, 
+        default: Date.now 
     },
     hostId: {
         type: String
