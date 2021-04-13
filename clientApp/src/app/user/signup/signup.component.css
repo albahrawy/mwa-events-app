@@ -54,21 +54,12 @@
   background-color: rgb(15, 66, 107);
 }
 
-.signup-span {
-  margin: 12px;
-}
-
 .login-button ::ng-deep .mat-button-wrapper {
   display: flex;
 }
 
 .fill-remaning-area {
   flex: 1 1 auto;
-}
-
-.signup-link {
-  margin-left: 12px;
-  text-decoration: none;
 }
 
 .login-spinner {

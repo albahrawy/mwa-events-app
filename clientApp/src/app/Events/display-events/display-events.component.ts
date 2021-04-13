@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";

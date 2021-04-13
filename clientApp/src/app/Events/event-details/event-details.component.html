@@ -1,4 +1,7 @@
-<ng-container *ngIf="event$|async; let ev">
+<div class="toolbar">
+  <h1 class="page-header">Event Information</h1>
+</div>
+<div class="main-container" *ngIf="event$|async; let ev">
   <div class="event-container">
     <div class="event-details">
       <mat-card class="event-card">
@@ -53,4 +56,4 @@
 
     </div>
   </div>
-</ng-container>
+</div>

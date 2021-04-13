@@ -1,7 +1,31 @@
 :host {
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
+
+.main-container {
+  display: flex;
+}
+
+.toolbar {
+  background-color: #9deffa;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-header {
+  text-align: center;
+  flex: 1 1 auto;
+  font-size: 40px;
+  font-family: Lucida Handwriting;
+  font-weight: bold;
+  margin: revert;
+}
+
 .event-card {
   max-width: 400px;
   margin: 10px;
@@ -24,15 +48,7 @@
   width: 400px;
   height: 350px;
   display: left;
-}
-.event-container-left {
-  width: 300px;
-  border: 1px solid green;
-  padding: 50px;
-  width: 400px;
-  height: 350px;
-  margin-left: 10px;
-  display: left;
+  background-image: url('../../../assets/images/wo.jfif');
 }
 
 .image-container {
@@ -46,17 +62,7 @@
   border: 1px solid rgb(216, 213, 213);
   border-radius: 5px;
 }
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
 
-:host {
-  height: 100%;
-  display: flex;
-  padding: 15px;
-}
 .event-container {
   flex: 1 1 auto;
   display: flex;
@@ -72,5 +78,7 @@
 }
 
 .attendees-container {
-  //flex : 1 0 25%;
+  //flex: 1 0 20%;
+  padding:20px;
+  box-sizing: border-box;
 }
