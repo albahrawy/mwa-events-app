@@ -1,7 +1,7 @@
 <div class="toolbar">
-  <h1 class="page-header">Create New Event</h1>
+  <h1 class="page-header">Modify Event</h1>
 </div>
-<form class="event-form" [formGroup]="fg" (ngSubmit)="createEvent()">
+<form class="event-form" [formGroup]="fg" (ngSubmit)="updateEvent()">
   <div class="form-fields">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
@@ -19,7 +19,6 @@
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
-
     <div class="date-time-area">
       <mat-form-field appearance="outline">
         <mat-label>Choose a date</mat-label>
@@ -58,14 +57,14 @@
           <mat-label>Zip</mat-label>
           <input matInput type="text" formControlName="zip">
           <mat-error>
-            <ng-container *ngIf="fg.get('address')?.get('zip')?.errors?.required">Zip Code is required</ng-container>
+            <ng-container *ngIf="fg.get('address')?.get('zip')?.errors?.required">Zip is required</ng-container>
           </mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="form-buttons">
-      <button mat-button type="submit" color="primary" [disabled]="busy||!fg.valid">Create Event</button>
-      <button mat-button type="reset" color="primary" [disabled]="busy">Cancel</button>
+      <button mat-button type="submit" color="primary" [disabled]="busy||!fg.valid||!fg.dirty">Update Event</button>
+      <button mat-button type="button" (click)="cancelUpdate()" color="primary" [disabled]="busy">Cancel</button>
     </div>
   </div>
   <div class="image-fields">
@@ -79,7 +78,7 @@
         </button>
       </div>
       <div class="image-view" fileDropZone (fileDrop)="onFileChange($event)">
-        <img [class.shown]="hasImage" #imgElement />
+        <img [class.shown]="hasImage" #imgElement [src]="imgUrl|fromapi" />
       </div>
       <input #_fileInput class="file-input" type="file" accept="images" multiple="false"
         (change)="onFileChange($event)">

@@ -12,32 +12,39 @@ export class EventService {
     getEvents(searchParams?: { [key: string]: any }) {
         searchParams = this.normalize(searchParams);
         if (!searchParams || !Object.keys(searchParams).length) {
-            return this.http.get(getUrl('events'));
+            return this.http.get<any>(getUrl('events'));
         } else {
-            return this.http.post(getUrl('events'), searchParams);
+            return this.http.post<any>(getUrl('events'), searchParams);
         }
     }
 
     getEventById(eventId) {
-        return this.http.get(getUrl('events', eventId));
+        return this.http.get<any>(getUrl('events', eventId));
     }
 
     getMyEvents() {
-        return this.http.get(getUrl('myEvents'));
+        return this.http.get(getUrl('events', 'myEvents'));
     }
 
     addEvent(event) {
         return this.http.post(getUrl('events', 'newEvent'), event);
     }
 
-    attendToEvent(eventId) {
-        return this.http.patch(getUrl('events', 'join', eventId), null);
+    updateEvent(eventId, event) {
+        return this.http.patch(getUrl('events', 'updateEvent', eventId), event);
+    }
+
+    attendToEvent(eventId, status) {
+        return this.http.patch<any>(getUrl('events', 'join', eventId), { status });
     }
 
     deleteEvent(eventId) {
         return this.http.delete(getUrl('events', eventId));
     }
 
+    addComment(comment: string, eventId: string) {
+        return this.http.patch(getUrl('events', 'comment', eventId), { comment });
+    }
 
 
     private normalize(obj, parentKey = null, parent = {}) {

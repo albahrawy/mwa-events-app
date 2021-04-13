@@ -1,3 +1,7 @@
+:host {
+  height: 100%;
+  overflow-y: scroll;
+}
 .search-bar {
   display: flex;
   padding: 10px;
@@ -32,6 +36,12 @@
 
 .fill-space {
   flex: 1 1 auto;
+}
+
+.join-icon {
+  border: 1px solid green;
+  color: green;
+  border-radius: 50%;
 }
 
 .image-view {

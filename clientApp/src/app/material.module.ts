@@ -15,9 +15,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    DragDropModule
+    DragDropModule,
+    MatSnackBarModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [
     MatButtonModule,
@@ -63,7 +67,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    DragDropModule
+    DragDropModule,
+    MatSnackBarModule,
+    NgxMaterialTimepickerModule
   ]
 })
 export class MaterialModule { }

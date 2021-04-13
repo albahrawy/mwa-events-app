@@ -1,18 +1,14 @@
 const express = require('express');
 const Events = require('../model/event');
-const convertAddress = require('../model/geo-converter');
 const uploader = require('../middleware/multer-upload');
+const { appendLocation } = require('../middleware/location-convert');
+const { tryCatchAndJson, verifyEventOwner } = require('../middleware/util');
 const router = express.Router();
-
-
 
 router.get('/', async (req, res, next) => {
     const location = req.userInfo?.location;
     const criteria = !!location ? { location: { $near: Object.values(location) } } : {};
-    Events.find(criteria, null, { limit: 12 }, (err, event) => {
-        if (err) { return next(err) }
-        res.json(event);
-    });
+    return tryCatchAndJson(() => Events.find(criteria, null, { limit: 12, sort: { date: -1 } }), res, next);
 });
 
 router.post('/', async (req, res, next) => {
@@ -25,86 +21,55 @@ router.post('/', async (req, res, next) => {
         filter['attendees.email'] = req.userInfo?.email;
         delete filter.joined;
     }
-    Events.find(filter, (err, event) => {
-        if (err) { return next(err) }
-        res.json(event);
-    });
+    return tryCatchAndJson(() => Events.find(filter, null, { sort: { date: -1 } }), res, next);
 });
-
-
 
 router.get('/myEvents', async (req, res, next) => {
-    const requserId = req.userInfo?.id;
-    await Events.find({ hostId: requserId }, (err, event) => {
-        if (err) { return next(err) }
-        res.json(event);
-    });
+    return tryCatchAndJson(() => Events.find({ hostId: req.userInfo?.id }, null, { limit: 12, sort: { date: -1 } }), res, next);
 });
 
-router.post('/newEvent', uploader, async (req, res, next) => {
-    if (!!req.body?.address) {
-        if (typeof req.body.address === "string") {
-            req.body.address = JSON.parse(req.body.address);
-        }
-        const address = `${req.body.address.city},${req.body.address.state},${req.body.address.zip}`;
-        req.body.location = await convertAddress(address);
-    }
+router.post('/newEvent', uploader, appendLocation, async (req, res, next) => {
+
     if (!!req.file) { req.body.image = req.file.filename; }
     req.body.hostId = req.userInfo?.id;
-    let newEvent = new Events(req.body);
-    newEvent.save((err, event) => {
-        if (err) {
-            return next(err);
-        }
-        res.json(event);
-    });
-})
+    return tryCatchAndJson(() => new Events(req.body).save(), res, next);
+});
 
 router.get('/:id', async (req, res, next) => {
-    await Events.findOne({ _id: req.params.id }, (err, event) => {
-        if (err) {
-            return next(err);
-        }
-        res.json(event);
-    })
+    return tryCatchAndJson(() => Events.findOne({ _id: req.params.id }), res, next);
 })
 
-router.put('/:id', async (req, res, next) => {
-    const requserId = req.userInfo?.id;
-    if (!requserId || requserId != req.body?.hostId) {
-        return next("You don't have permission to update this event");
-    }
-    await Events.findOneAndUpdate({ _id: req.params.id }, req.body, {
-        new: true, useFindAndModify: false
-    }, (err, event) => {
-        if (err) {
-            return next(err)
-        }
-        res.json(event);
-    })
+router.patch('/updateEvent/:id', uploader, verifyEventOwner, appendLocation, async (req, res, next) => {
+
+    if (!!req.file) { req.body.image = req.file.filename; }
+    return tryCatchAndJson(() => Events.findOneAndUpdate({ _id: req.params.id }, req.body,
+        { new: true, useFindAndModify: false }), res, next);
 })
 
 router.patch('/join/:id', async (req, res, next) => {
+
     const attende = { name: req.userInfo.name, email: req.userInfo.email };
-    await Events.updateOne({ _id: req.params.id }, { $addToSet: { 'attendees': attende } }, {}, (err, event) => {
-        if (err) {
-            return next(err)
-        }
-        res.json(event);
-    })
+    let action;
+    let isJoind = req.body?.status == null ? true : !!req.body.status;
+    if (isJoind) {
+        action = { $addToSet: { 'attendees': attende } };
+    } else {
+        action = { $pull: { attendees: { email: attende.email } } }
+    }
+
+    return tryCatchAndJson(() => Events.updateOne({ _id: req.params.id }, action), res, next, { isJoind });
 })
 
-router.delete('/:id', async (req, res, next) => {
-    const requserId = req.userInfo?.id;
-    if (!requserId || requserId != req.params.id) {
-        return next("You don't have permission to delete this event");
-    }
-    await Events.remove({ _id: req.params.id }, (err) => {
-        if (err) {
-            return next(err)
-        }
-        res.json({ message: 'Event Deleted Successfully' })
-    })
-})
+
+router.patch('/comment/:id', async (req, res, next) => {
+
+    const comment = { name: req.userInfo.name, email: req.userInfo.email, content: req.body.comment };
+    return tryCatchAndJson(() => Events.findByIdAndUpdate(req.params.id,
+        { $addToSet: { 'comments': comment } }, { new: true }), res, next);
+});
+
+router.delete('/:id', verifyEventOwner, async (req, res, next) => {
+    return tryCatchAndJson(() => Events.remove({ _id: req.params.id }), res, next, { message: 'Event Deleted Successfully' });
+});
 
 module.exports = router;

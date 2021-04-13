@@ -15,9 +15,15 @@ const Event = mongoose.model('Events', {
         type: String,
         required: true
     },
-    date_added: { 
-        type : Date, 
-        default: Date.now 
+    date: {
+        type: Date
+    },
+    time: {
+        type: String
+    },
+    date_added: {
+        type: Date,
+        default: Date.now
     },
     hostId: {
         type: String
@@ -52,7 +58,10 @@ const Event = mongoose.model('Events', {
         type: String
     },
     comments: [{
-        name: { type: String },
+        name: {
+            first: { type: String },
+            last: { type: String }
+        },
 
         email: {
             type: String

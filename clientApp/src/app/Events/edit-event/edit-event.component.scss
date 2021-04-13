@@ -2,8 +2,10 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  background-color: #f2ffff;
+  height: 100%;
+  overflow-y: auto;
 }
+
 .toolbar {
   background-color: #9deffa;
   height: 80px;
@@ -27,6 +29,19 @@
   box-sizing: border-box;
 }
 
+.date-time-area {
+  margin-top: 5px;
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.date-time-area .mat-form-field {
+  width: 50%;
+  margin-right: 5px;
+}
+
 .form-fields {
   display: flex;
   flex-direction: column;
@@ -45,19 +60,6 @@
 
 .address-content {
   display: flex;
-}
-
-.date-time-area {
-  margin-top: 5px;
-  padding: 5px;
-  width: 100%;
-  display: flex;
-  box-sizing: border-box;
-}
-
-.date-time-area .mat-form-field {
-  width: 50%;
-  margin-right: 5px;
 }
 
 .address-content .mat-form-field {

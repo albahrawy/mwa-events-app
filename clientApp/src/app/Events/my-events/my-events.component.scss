@@ -1,0 +1,46 @@
+:host {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.toolbar {
+  background-color: #9deffa;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page-header {
+  text-align: center;
+  flex: 1 1 auto;
+  font-size: 40px;
+  font-family: Lucida Handwriting;
+  font-weight: bold;
+  margin: revert;
+}
+
+.event-card {
+    max-width: 400px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .event-header-image {
+    background-size: cover;
+  }
+  .event-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image-container {
+    padding: 10px;
+  }
+  
+  .image-view {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border: 1px solid rgb(216, 213, 213);
+    border-radius: 5px;
+  }

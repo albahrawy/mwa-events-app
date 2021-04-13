@@ -1,0 +1,76 @@
+:host {
+  height: 100%;
+  overflow-y: auto;
+}
+.event-card {
+  max-width: 400px;
+  margin: 10px;
+  cursor: pointer;
+  width: 1000px;
+}
+
+.event-header-image {
+  background-size: cover;
+}
+.event-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+.event-container-right {
+  width: 300px;
+  border: 1px solid green;
+  padding: 50px;
+  width: 400px;
+  height: 350px;
+  display: left;
+}
+.event-container-left {
+  width: 300px;
+  border: 1px solid green;
+  padding: 50px;
+  width: 400px;
+  height: 350px;
+  margin-left: 10px;
+  display: left;
+}
+
+.image-container {
+  padding: 10px;
+}
+
+.image-view {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border: 1px solid rgb(216, 213, 213);
+  border-radius: 5px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+:host {
+  height: 100%;
+  display: flex;
+  padding: 15px;
+}
+.event-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.event-details {
+}
+.event-comments {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.attendees-container {
+  //flex : 1 0 25%;
+}

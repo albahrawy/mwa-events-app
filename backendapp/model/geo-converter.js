@@ -10,7 +10,7 @@ const convertAddress = (searchtext) => {
             .query({ searchtext })
             .then(response => {
                 const results = JSON.parse(response.text)?.Response?.View?.[0]?.Result?.[0]?.Location?.NavigationPosition?.[0];
-                res({ long: results?.Longitude, lat: results?.Latitude });
+                res({ long: results?.Longitude || 0, lat: results?.Latitude || 0 });
             });
     })
 }

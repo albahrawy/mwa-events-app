@@ -25,11 +25,11 @@
       <input matInput type="text" formControlName="zip">
     </mat-form-field>
   </ng-container>
-  <button mat-icon-button color="primary" (click)="doSearch()">
+  <button mat-icon-button color="primary" (click)="doSearch()" class="search">
     <mat-icon>search</mat-icon>
   </button>
   <span class="fill-space"></span>
-  <mat-checkbox (change)="doSearch()" class="check-box" formControlName="joined">Only Joined</mat-checkbox>
+  <mat-checkbox (change)="doSearch()" class="check-box" formControlName="joined">Selected Events</mat-checkbox>
 
 </div>
 
@@ -39,23 +39,21 @@
       <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+(ev.image|fromapi)+')'"></div>
       <mat-card-title>{{ev.title}}</mat-card-title>
       <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
+      <ng-container *ngIf="ev.isJoind">
+        <span class="fill-space"></span>
+        <mat-icon class="join-icon">done</mat-icon>
+      </ng-container>
     </mat-card-header>
     <div class="image-container">
       <img mat-card-image [src]="ev.image|fromapi" class="image-view" (click)="onEventClick(ev._id)" />
     </div>
     <mat-card-content (click)="onEventClick(ev._id)">
-      <div>
-        {{ev.description}}
-      </div>
-      <div>ev.location</div>
+      <div>{{ev.description}}</div>
+      <div>{{ev.address.city}},{{ev.address.state}}</div>
+      <div>{{ev.date|date}} - {{ev.time}}</div>
     </mat-card-content>
     <mat-card-actions>
-      <ex-button #btnJoin [text]="'Join'|isJoined:ev" [disabled]="false|isJoined:ev"
-        (buttonClicked)="attend(ev._id,btnJoin)">
-        <span>first value</span>
-        <label>second value</label>
-      </ex-button>
-
+      <button mat-button (click)="attend(ev)">{{!ev.isJoind?'Join':'Leave'}}</button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -3,11 +3,10 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../auth.guard";
-import { ExButton } from "../inner-components/ex-button";
-import { IsJoind } from "../inner-components/is-joined.pipe";
 import { MaterialModule } from "../material.module";
 import { CreateEventComponent } from "./create-event/create-event.component";
 import { DisplayEventComponent } from "./display-events/display-events.component";
+import { EditEventComponent } from "./edit-event/edit-event.component";
 import { EventDetailsComponent } from "./event-details/event-details.component";
 import { FileDropZoneDirective } from "./file-drop-zone.directive";
 import { FromApiUrlPipe } from "./from-api";
@@ -24,6 +23,9 @@ const routes: Routes = [
         path: 'newevent', component: CreateEventComponent, canActivate: [AuthGuard]
     },
     {
+        path: 'editevent/:eventId', component: EditEventComponent, canActivate: [AuthGuard]
+    },
+    {
         path: ':eventId', component: EventDetailsComponent, canActivate: [AuthGuard]
     }
 ];
@@ -32,10 +34,9 @@ const routes: Routes = [
     declarations: [
         DisplayEventComponent,
         CreateEventComponent,
+        EditEventComponent,
         EventDetailsComponent,
         MyEventsComponent,
-        ExButton,
-        IsJoind,
         FromApiUrlPipe,
         FileDropZoneDirective
     ],

@@ -1,23 +1,56 @@
-<!-- <div>
-    <div class="input-area">
-      <form (submit)="sendMessage()" name="messageForm" #messageForm="ngForm">
-        <div>
-          <input type="text" placeholder="Your name" name="name" id="name" [(ngModel)]="message.name">
-          <textarea type="text" placeholder="Your message" name="message" id="message" [(ngModel)]="message.text" rows="5"></textarea>
-        </div>
-        <button>
-          <span data-feather="send"></span>
-        </button>
-      </form>
-    </div>
-  </div> -->
 <ng-container *ngIf="event$|async; let ev">
+  <div class="event-container">
+    <div class="event-details">
+      <mat-card class="event-card">
+        <mat-card-header>
+          <div mat-card-avatar class="event-header-image" [style.background-image]="'url('+(ev.image|fromapi)+')'">
+          </div>
+          <mat-card-title>{{ev.title}}</mat-card-title>
+          <mat-card-subtitle>{{ev.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <div class="image-container">
+          <img mat-card-image [src]="ev.image|fromapi" class="image-view" />
+        </div>
+        <mat-card-content>
+          <div>{{ev.description}}</div>
+          <div>{{ev.address.city}},{{ev.address.state}}</div>
+          <div>{{ev.date|date}} - {{ev.time}}</div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="attend(ev)">{{!ev.isJoind?'Join':'Leave'}}</button>
 
-  <ul>
-    <li *ngFor="let attend of ev.attendees">{{attend.name.first}} {{attend.name.last}}</li>
-  </ul>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="event-comments">
+      <h2>Comments ({{ev.comments.length}})</h2>
+      <form class="comment-form">
 
-</ng-container>>
+        <mat-form-field class="example-full-width">
+          <mat-label>Leave a comment</mat-label>
+          <textarea matInput (keyup)="addComment($event)" [formControl]="commentCtrl"></textarea>
+        </mat-form-field>
+      </form>
+      <div *ngIf="!ev.comments?.length">No comments found.</div>
+      <div *ngIf="ev.comments?.length">
+        <div *ngFor="let comment of ev.comments">
+          <div class='commnet-name'>{{comment.name.first}} {{comment.name.last}}</div>
+          <div class="comment-text">{{comment.content}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="attendees-container">
+    <div class="event-container-right">
+      <h2>Attendees</h2>
+      <ul style="list-style-type:circle">
+        <li *ngFor="let attend of ev.attendees">
+          <div>{{attend.name.first }} {{attend.name.last }}</div>
+          <p>{{attend.email }}</p>
+        </li>
+      </ul>
 
 
-<!-- {{event$|async|json}} -->
+    </div>
+  </div>
+</ng-container>
