@@ -58,14 +58,23 @@
   margin: 12px;
 }
 
+.login-button ::ng-deep .mat-button-wrapper {
+  display: flex;
+}
+
+.fill-remaning-area {
+  flex: 1 1 auto;
+}
+
 .signup-link {
-  margin: 12px;
+  margin-left: 12px;
   text-decoration: none;
 }
 
 .login-spinner {
-  width: 30px;
-  height: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .address-area {

@@ -18,8 +18,6 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const eventsRouter = require('./routes/events');
 
-
-
 const app = express();
 
 app.use('/picture', express.static(__dirname + '/assets/eventImages'));
