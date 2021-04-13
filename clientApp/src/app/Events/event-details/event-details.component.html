@@ -12,7 +12,6 @@
           <img mat-card-image [src]="ev.image|fromapi" class="image-view" />
         </div>
         <mat-card-content>
-<<<<<<< HEAD
           <div>{{ev.description}}</div>
           <div>{{ev.address.city}},{{ev.address.state}}</div>
           <div>{{ev.date|date}} - {{ev.time}}</div>
@@ -53,55 +52,5 @@
 
 
     </div>
-=======
-          <div>
-            {{ev.description}}
-          </div>
-          <div>ev.location</div>
-        </mat-card-content>
-        <mat-card-actions>
-          <ex-button #btnJoin [text]="'Join'|isJoined:ev" [disabled]="false|isJoined:ev"
-            (buttonClicked)="attend(ev._id,btnJoin)">
-            <span>first value</span>
-            <label>second value</label>
-          </ex-button>
-
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="event-comments">
-      <h2>Comments ({{ev.comments.length}})</h2>
-      <form class="comment-form">
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Leave a comment</mat-label>
-          <textarea matInput (keyup)="addComment($event)" [formControl]="commentCtrl"></textarea>
-        </mat-form-field>
-      </form>
-      <div *ngIf="!ev.comments?.length">No comments found.</div>
-      <div *ngIf="ev.comments?.length">
-        <div *ngFor="let comment of ev.comments">
-          <div class='commnet-name'>{{comment.name.first}} {{comment.name.last}}</div>
-          <div class="comment-text">{{comment.content}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="attendees-container">
-    <mat-grid-tile>
-
-      <div class="event-container-right">
-        <h2>Attendees</h2>
-        <ul style="list-style-type:circle">
-          <li *ngFor="let attend of ev.attendees">
-            <div>{{attend.name.first }} {{attend.name.last }}</div>
-            <p>{{attend.email }}</p>
-          </li>
-        </ul>
-
-
-      </div>
-    </mat-grid-tile>
->>>>>>> d527ef286b39b3ab1e94b22ff1b747989e8a423a
   </div>
 </ng-container>
