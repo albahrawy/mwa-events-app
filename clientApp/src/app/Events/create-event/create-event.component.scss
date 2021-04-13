@@ -2,6 +2,7 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   background-color: #f2ffff;
 }
 .toolbar {
@@ -18,6 +19,15 @@
   font-family: Lucida Handwriting;
   font-weight: bold;
   margin: revert;
+=======
+  background-color: #EEE2DC;
+}
+.page-header {
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: center;
+  font-family: Blippo, fantasy;
+>>>>>>> d527ef286b39b3ab1e94b22ff1b747989e8a423a
 }
 
 .event-form {

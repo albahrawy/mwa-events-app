@@ -19,6 +19,7 @@
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
+<<<<<<< HEAD
 
     <div class="date-time-area">
       <mat-form-field appearance="outline">
@@ -34,6 +35,14 @@
         <ngx-material-timepicker #timePicker></ngx-material-timepicker>
       </mat-form-field>
     </div>
+=======
+    <mat-form-field appearance="outline">
+      <mat-label>Choose Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+>>>>>>> d527ef286b39b3ab1e94b22ff1b747989e8a423a
 
     <div class="address-area" formGroupName="address">
       <span class="caption-span">Address</span>
@@ -70,7 +79,7 @@
   </div>
   <div class="image-fields">
     <div class="image-area">
-      <span class="image-caption"> Choose or drage to add image:</span>
+      <span class="image-caption"> Choose Image:</span>
 
       <div class="file-input-area">
         <div class="file-input-placeholder">{{imageFile?.name || '\u00A0'}}</div>
