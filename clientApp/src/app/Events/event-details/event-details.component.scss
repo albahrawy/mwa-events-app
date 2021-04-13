@@ -1,10 +1,20 @@
+:host{
+  background-color: #f2f2f2;
+}
 .event-card {
     max-width: 400px;
     margin: 10px;
     cursor: pointer;
     width: 1000px;
   }
-  
+  .who{
+    text-align: center;
+    color:darkolivegreen;
+    font-family:Optima;
+    font-size: 30px;
+    font-family: Estrangelo Edessa;
+    font-weight: bold;
+  }
   .event-header-image {
     background-size: cover;
   }
@@ -13,13 +23,26 @@
     flex-wrap: wrap;
     padding-top: 50px;
   }
+  .welcome{
+    text-align: center;
+    padding-top:20px;
+    flex: 1 1 auto;
+    font-size: 60px;
+    font-family: Lucida Handwriting;
+    font-weight: bold;
+  }
+  .toolbar{
+    background-color:#9deffa;
+    height:80px;
+  }
   .event-container-right{
+    margin:0px;
     width: 300px;
-    border: 1px solid green;
     padding: 50px;
     width: 400px;
     height: 350px;
     display: left;
+    background-image: url('../../../assets/images/wo.jfif');
   }
   .event-container-left{
     width: 300px;
@@ -29,12 +52,14 @@
     height: 350px;
     margin-left:10px;
     display: left;
+ 
   }
   
   .image-container {
     padding: 10px;
   }
   
+
   .image-view {
     width: 400px;
     height: 300px;

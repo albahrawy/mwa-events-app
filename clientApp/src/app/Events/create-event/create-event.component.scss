@@ -2,13 +2,19 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  background-color: #EEE2DC;
+  background-color: #f2ffff;
+}
+.toolbar{
+  background-color:#9deffa;
+    height:80px;
 }
 .page-header {
-  margin-top: 10px;
-  margin-left: 10px;
   text-align: center;
-  font-family: Blippo, fantasy;
+    padding-top:10px;
+    flex: 1 1 auto;
+    font-size: 40px;
+    font-family: Lucida Handwriting;
+    font-weight: bold;
 }
 .event-form {
   display: flex;

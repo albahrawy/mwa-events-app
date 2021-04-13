@@ -1,3 +1,4 @@
+
 <div class="search-bar" [formGroup]="searchgrp">
   <mat-form-field>
     <mat-label>Search</mat-label>
@@ -25,14 +26,13 @@
       <input matInput type="text" formControlName="zip">
     </mat-form-field>
   </ng-container>
-  <button mat-icon-button color="primary" (click)="doSearch()">
+  <button mat-icon-button color="primary" (click)="doSearch()" class="search">
     <mat-icon>search</mat-icon>
   </button>
   <span class="fill-space"></span>
   <mat-checkbox (change)="doSearch()" class="check-box" formControlName="joined">Selected Events</mat-checkbox>
 
 </div>
-
 <div class="event-container">
   <mat-card *ngFor="let ev of events$|async" class="event-card">
     <mat-card-header (click)="onEventClick(ev._id)">
@@ -59,3 +59,6 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+  
+  
