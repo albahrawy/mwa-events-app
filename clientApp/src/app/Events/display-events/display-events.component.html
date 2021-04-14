@@ -49,8 +49,10 @@
     </div>
     <mat-card-content (click)="onEventClick(ev._id)">
       <div>{{ev.description}}</div>
-      <div>{{ev.address.city}},{{ev.address.state}}</div>
-      <div>{{ev.date|date}} - {{ev.time}}</div>
+      <div class="ev-details">
+        <div>{{ev.address.city}}, {{ev.address.state}}</div>
+        <div>{{ev.date|date}} - {{ev.time}}</div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="attend(ev)">{{!ev.isJoind?'Join':'Leave'}}</button>

@@ -1,6 +1,6 @@
 <div class="toolbar">
     <h1 class="page-header">Welcome To Your Events</h1>
-  </div>
+</div>
 <div class="event-container">
     <ng-container *ngFor="let ev of events$|async">
         <mat-card class="event-card" *ngIf="!ev.hidden">
@@ -16,8 +16,10 @@
             </div>
             <mat-card-content>
                 <div>{{ev.description}}</div>
-                <div>{{ev.address.city}},{{ev.address.state}}</div>
-                <div>{{ev.date|date}} - {{ev.time}}</div>
+                <div class="ev-details">
+                    <div>{{ev.address.city}}, {{ev.address.state}}</div>
+                    <div>{{ev.date|date}} - {{ev.time}}</div>
+                </div>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-button (click)="delete(ev)">Delete</button>

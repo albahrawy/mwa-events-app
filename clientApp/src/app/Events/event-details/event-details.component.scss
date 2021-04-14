@@ -69,7 +69,10 @@
   flex-direction: column;
   align-items: center;
 }
-.event-details {
+.commnet-name,
+.ev-details{
+  font-weight: bold;
+  padding-top: 10px;
 }
 .event-comments {
   width: 100%;
